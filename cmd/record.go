@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -83,7 +83,7 @@ var (
 			param.Proxied, _ = cmd.Flags().GetBool("proxied")
 			param.TTL, _ = cmd.Flags().GetInt("ttl")
 			param.Line, _ = cmd.Flags().GetString("line")
-			
+
 			if err := dnsapi.ValidRecordType(param.Type); err != nil {
 				cobra.CheckErr(err)
 			}

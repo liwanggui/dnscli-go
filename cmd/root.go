@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"errors"
@@ -32,13 +32,13 @@ var (
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVarP(&configName, "config-name", "", "", "使用的 DNS 服务商配置名，用于区分多个不同的配置")
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "配置文件路径 (default: $HOME/.dnscli/config.yaml)")
+	rootCmd.PersistentFlags().StringVarP(&configName, "config-name", "N", "", "使用的 DNS 服务商配置名，用于区分多个不同的配置")
 	rootCmd.PersistentFlags().StringVarP(&secretID, "secret-id", "", "", "DNS 服务商 API 密钥 ID")
 	rootCmd.PersistentFlags().StringVarP(&secretKey, "secret-key", "", "", "DNS 服务商 API 密钥 Secret")
 	rootCmd.PersistentFlags().StringVarP(&apiToken, "api-token", "", "", "DNS 服务商 API Token")
 	rootCmd.PersistentFlags().StringVarP(&apiKey, "api-key", "", "", "DNS 服务商 API KEY")
 	rootCmd.PersistentFlags().StringVarP(&apiEmail, "api-email", "", "", "注册 DNS 服务商平台的邮箱地址")
-	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "配置文件路径 (default: $HOME/.dnscli/config.yaml)")
 
 	rootCmd.AddCommand(cCmd)
 	rootCmd.AddCommand(rCmd)
@@ -118,6 +118,6 @@ func initConfig() {
 	}
 }
 
-func main() {
-	rootCmd.Execute()
+func Execute() error {
+	return rootCmd.Execute()
 }
