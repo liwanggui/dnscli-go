@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"errors"
@@ -118,6 +118,6 @@ func initConfig() {
 	}
 }
 
-func main() {
-	rootCmd.Execute()
+func Execute() error {
+	return rootCmd.Execute()
 }
